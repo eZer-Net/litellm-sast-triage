@@ -1,0 +1,11 @@
+services:
+  triage:
+    build: .
+    env_file: .env
+    volumes:
+      - ./.env:/app/.env:ro
+      # Mount scanned repositories read-only; select one with --project /app/target
+      - ${PROJECT_MOUNT:-.}:/app/target:ro
+      - ./output:/app/output
+    stdin_open: true
+    tty: true
